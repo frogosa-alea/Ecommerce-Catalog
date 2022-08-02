@@ -8,7 +8,7 @@ const ProductListing = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     fetchProducts();
-  }, [])
+  })
 
   const fetchProducts = async() =>{
     const response = await axios
