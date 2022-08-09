@@ -1,34 +1,38 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
-
+import { Card, Row, Col, Tag } from 'antd';
+const { Meta } = Card;
 const ProductComponent = () => {
   const products = useSelector((state) => state.allProducts.products);
 
   const renderList = products.map((product) => {
     const { id, title, image, price, category } = product
     return(
-      <div className='four wide column' key={id}>
+      <Col span={6}>
         <Link to={`/product/${id}`}>
-          <div className="ui link cards">
-            <div className="card">
-              <div className="image">
-                <img src={image} alt={title}/>
-              </div>
-              <div className="content">
-                <div className="header">{title}</div>
-                <div className="meta price">$ {price}</div>
-                <div className="meta">{category}</div>
-              </div>
-            </div>
-          </div>
+          <Card
+            className='m-4'
+            hoverable
+            style={{ width: 240 }}
+            cover={<img alt="example" className="p-4" src={image} />}
+          >
+            <h5>{title}</h5>
+            <Tag color="#108ee9">
+              <span style={{ textTransform:'capitalize'}}>
+                {category}
+              </span>
+            </Tag>
+          </Card>
         </Link>
-      </div>
+      </Col>
     );
   })
   return (
-    <div class="ui grid">
+    <div>
+      <Row gutter={[16, 16]}>
       {renderList}
+      </Row>
     </div>
   )
 }
